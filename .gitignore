@@ -1,0 +1,27 @@
+### JetBrains stuff ###
+.idea/
+*.iml
+modules.xml
+*.ipr
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+### Virtual enviroments ###
+venv/
+
+### Visual Studio Code ###
+.vscode/
+
+
+### Requirements .txt
+requirements.txt
