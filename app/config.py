@@ -1,18 +1,34 @@
 import logging
 import sys
+from functools import lru_cache
 
 from pydantic import BaseSettings
 from loguru import logger
 
 
 class Settings(BaseSettings):
+    # AMQP Settings
     amqp_broker_url: str = "amqp://guest:guest@localhost:5672/"
+    # InfluxDB Settings
     influx_db_host: str = "localhost"
     influx_db_port: int = 8086
     influx_db_user: str = "user"
     influx_db_password: str = "user"
     influx_db_database: str = "IoTMiddleware"
+    # Log Settings
     log_level: str = "INFO"
+    # Hydra/OAuth2 Settings
+    hydra_url: str = "http://localhost:9000"
+    hydra_algorithms: str = "RS256"
+    # User service URL
+    user_service_url: str = "http://localhost:8080"
+    # Register device service URL
+    register_device_service_url: str = "http://localhost:8000"
+
+
+@lru_cache()
+def get_settings():
+    return Settings()
 
 
 class InterceptHandler(logging.Handler):
@@ -32,7 +48,8 @@ class InterceptHandler(logging.Handler):
         logger.opt(depth=depth, exception=record.exc_info).log(level, record.getMessage())
 
 
-def configure_logger(settings: Settings) -> None:
+def configure_logger() -> None:
+    settings = get_settings()
     intercept_handler = InterceptHandler()
     logging.root.setLevel(settings.log_level)
 
