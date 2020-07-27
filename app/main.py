@@ -7,7 +7,7 @@ from starlette.responses import JSONResponse
 from app import config, rabbit_events
 from app.influx_connection import influx_connection
 from app.routes import data
-from utils.hydra_connection import AuthError
+from app.utils.hydra_connection import AuthError
 
 settings = config.get_settings()
 app = FastAPI(root_path=settings.root_path)

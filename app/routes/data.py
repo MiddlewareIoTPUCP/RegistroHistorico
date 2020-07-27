@@ -8,7 +8,7 @@ from starlette.responses import Response
 
 from app.data_types import QueryDataDeviceId
 from app.influx_connection.influx_connection import get_database
-from utils.hydra_connection import get_current_user
+from app.utils.hydra_connection import get_current_user
 
 from app.web_requests.user_service import get_owner_tokens
 
