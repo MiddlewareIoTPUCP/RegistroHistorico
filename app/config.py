@@ -7,6 +7,8 @@ from loguru import logger
 
 
 class Settings(BaseSettings):
+    # Root Path (for api gateway)
+    root_path: str = ""
     # AMQP Settings
     amqp_broker_url: str = "amqp://guest:guest@localhost:5672/"
     # InfluxDB Settings
