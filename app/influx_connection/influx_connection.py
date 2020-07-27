@@ -1,3 +1,5 @@
+from functools import lru_cache
+
 from aioinflux import InfluxDBClient
 from loguru import logger
 
@@ -20,5 +22,6 @@ async def configure_connection(settings: Settings):
     logger.info("Connection set up for InfluxDB")
 
 
-async def get_database() -> InfluxDBClient:
+@lru_cache()
+def get_database() -> InfluxDBClient:
     return influx.client

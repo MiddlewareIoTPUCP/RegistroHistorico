@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from typing import Union, List, Optional
 from pydantic import BaseModel, validator, Extra, Field
 
@@ -44,3 +45,33 @@ class DeviceVirtualModel(BaseModel):
 
     class Config:
         extra = Extra.forbid
+
+
+class QueryDataTime(BaseModel):
+    startTime: datetime
+    finishTime: datetime
+
+    @validator('startTime')
+    def give_timezone_start(cls, startTime: datetime):
+        return startTime.replace(tzinfo=None)
+
+    @validator('finishTime')
+    def give_timezone_finish(cls, finishTime: datetime):
+        return finishTime.replace(tzinfo=None)
+
+
+# Model to query device data
+class QueryDataBase(BaseModel):
+    ownerToken: str
+    readingType: str
+    times: QueryDataTime
+
+
+# Model to query device data based on DeviceId
+class QueryDataDeviceId(QueryDataBase):
+    deviceId: str
+
+
+# Model to query device data based on objectId
+class QueryDataObjectId(QueryDataBase):
+    objectId: str

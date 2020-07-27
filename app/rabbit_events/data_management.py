@@ -5,7 +5,7 @@ from loguru import logger
 from pydantic import ValidationError
 
 from app.data_types import Readings
-from app.web_requests import register_service
+from app.web_requests import register_device_service
 from app.influx_connection import influx_data_management
 
 
@@ -15,7 +15,7 @@ async def save_data(message: IncomingMessage):
             readings = Readings.parse_raw(message.body.decode(), content_type="application/json")
 
             # Querying the virtual model from Register service
-            deviceVirtualModel = await register_service.query_virtual_model(readings.objID, readings.ownerToken)
+            deviceVirtualModel = await register_device_service.query_virtual_model(readings.objID, readings.ownerToken)
             if deviceVirtualModel is not None:
                 # Save it to influex
                 await influx_data_management.save_new_reading(readings, deviceVirtualModel)
