@@ -36,7 +36,7 @@ async def save_new_data(connection: Connection):
         await channel.declare_exchange(name="new_data", type=ExchangeType.FANOUT, durable=True)
 
         # Create an anonymous exclusive queue to listen for messages
-        queue = await channel.declare_queue(name="", exclusive=True)
+        queue = await channel.declare_queue(name="new_data_consumer")
         await queue.bind(exchange="new_data", routing_key="")
 
         # Start consuming from that queue

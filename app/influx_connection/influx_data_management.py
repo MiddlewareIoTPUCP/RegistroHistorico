@@ -39,5 +39,5 @@ async def save_new_reading(readings: Readings, deviceVirtualModel: DeviceVirtual
     influx_write_map["fields"] = fields_map
 
     # Write it to influxDB
-    influxClient = await influx_connection.get_database()
+    influxClient = influx_connection.get_database()
     await influxClient.write(influx_write_map)
