@@ -42,7 +42,7 @@ async def get_current_token(security_scopes: SecurityScopes, token: str = Depend
                     rsa_key,
                     audience="",
                     algorithms=settings.hydra_algorithms,
-                    issuer=settings.hydra_url + "/",
+                    issuer=settings.hydra_issuer_url + "/",
                     options={'verify_aud': False}
                 )
             except jwt.ExpiredSignatureError as e:

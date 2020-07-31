@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     # Hydra/OAuth2 Settings
     hydra_url: str = "http://localhost:9000"
     hydra_algorithms: str = "RS256"
+    hydra_issuer_url: str = "http://localhost:9000"
     # User service URL
     user_service_url: str = "http://localhost:8080"
     # Register device service URL
