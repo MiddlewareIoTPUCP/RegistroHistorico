@@ -34,7 +34,7 @@ async def save_new_reading(readings: Readings, deviceVirtualModel: DeviceVirtual
                 readingObj.index, readings.objID
             ))
             continue
-        fields_map[virtualModel.readingType] = readingObj.reading
+        fields_map[virtualModel.readingType] = float(readingObj.reading)
 
     influx_write_map["fields"] = fields_map
 
